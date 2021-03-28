@@ -8,6 +8,20 @@ class NewTransaction extends StatelessWidget {
 
   NewTransaction(this.handlerAddTransaction);
 
+  void _handleSubmit() {
+    String title = _titleController.text;
+    String amount = _amountController.text;
+
+    if (title.isEmpty || amount.isEmpty) return;
+
+    if (double.tryParse(amount) == null) {
+      print('잘못된 금액 값입니다');
+      return;
+    }
+
+    handlerAddTransaction(title, double.parse(amount));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -38,7 +52,7 @@ class NewTransaction extends StatelessWidget {
             TextButton(
               child: Text('ADD'),
               onPressed: () {
-                handlerAddTransaction(_titleController.text, double.parse(_amountController.text));
+                _handleSubmit();
               },
             ),
           ],
