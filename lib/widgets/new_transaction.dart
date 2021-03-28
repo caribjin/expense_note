@@ -25,6 +25,7 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Title',
               ),
+              keyboardType: TextInputType.text,
             ),
             TextField(
               controller: _amountController,
@@ -32,6 +33,7 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Amount',
               ),
+              keyboardType: TextInputType.number,
             ),
             TextButton(
               child: Text('ADD'),
