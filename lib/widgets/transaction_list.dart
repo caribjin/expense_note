@@ -11,7 +11,8 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height - 320,
+      // color: Colors.green,
+      height: MediaQuery.of(context).size.height - 140,
       child: ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (BuildContext context, int index) {
@@ -27,7 +28,7 @@ class TransactionList extends StatelessWidget {
                   decoration: BoxDecoration(
                     // shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       width: 2,
                     ),
                   ),
@@ -36,7 +37,7 @@ class TransactionList extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
