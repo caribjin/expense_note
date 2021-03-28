@@ -26,14 +26,16 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Fultter Demo'),
       ),
-      body: Container(
-        // color: Colors.green,
+      body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Card(
-              color: Colors.blue,
-              child: Text(
-                'CHART',
+            Container(
+              child: Card(
+                color: Colors.blue,
+                child: Text(
+                  'CHART',
+                ),
               ),
             ),
             UserTransactions(),

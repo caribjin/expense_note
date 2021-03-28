@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'new_transaction.dart';
@@ -16,6 +18,15 @@ class _UserTransactionsState extends State<UserTransactions> {
   @override
   void initState() {
     super.initState();
+
+    for (int i = 0; i < 20; i++) {
+      transactions.add(Transaction(
+        id: 't$i',
+        title: 'Title $i',
+        amount: 100.12,
+        date: DateTime.now(),
+      ));
+    }
   }
 
   void _addTransaction(String title, double amount) {
