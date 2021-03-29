@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 
 class ChartBar extends StatelessWidget {
-  final String label;
-  final double amount;
-  final double percent;
+  final String _label;
+  final double _amount;
+  final double _percent;
 
-  ChartBar(this.label, this.amount, this.percent);
+  ChartBar(this._label, this._amount, this._percent);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('\$${amount.toStringAsFixed(0)}'),
+        Container(
+          height: 16,
+          child: FittedBox(
+            child: Text('\$${_amount.toStringAsFixed(0)}'),
+          ),
+        ),
         SizedBox(height: 5),
         Container(
-          height: 100,
+          height: 60,
           width: 10,
           child: Stack(
             children: [
@@ -28,7 +33,7 @@ class ChartBar extends StatelessWidget {
                 ),
               ),
               FractionallySizedBox(
-                heightFactor: percent,
+                heightFactor: _percent,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
@@ -40,7 +45,7 @@ class ChartBar extends StatelessWidget {
           ),
         ),
         SizedBox(height: 5),
-        Text(label.substring(0, 1)),
+        Text(_label.substring(0, 1)),
       ],
     );
   }

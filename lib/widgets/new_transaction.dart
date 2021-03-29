@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
-  final Function handlerAddTransaction;
+  final Function _handlerAddTransaction;
 
-  NewTransaction(this.handlerAddTransaction);
+  NewTransaction(this._handlerAddTransaction);
 
   @override
   _NewTransactionState createState() => _NewTransactionState();
@@ -12,6 +13,14 @@ class NewTransaction extends StatefulWidget {
 class _NewTransactionState extends State<NewTransaction> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+  DateTime _date;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _date = DateTime.now();
+  }
 
   void _handleSubmit() {
     String title = _titleController.text;
@@ -24,7 +33,22 @@ class _NewTransactionState extends State<NewTransaction> {
       return;
     }
 
-    widget.handlerAddTransaction(title, double.parse(amount));
+    widget._handlerAddTransaction(title, double.parse(amount), _date);
+  }
+
+  void _showDatePicker() async {
+    DateTime currentDate = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime(2021),
+      lastDate: DateTime.now(),
+    );
+
+    if (currentDate == null) return;
+
+    setState(() {
+      _date = currentDate;
+    });
   }
 
   @override
@@ -54,7 +78,28 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
               keyboardType: TextInputType.number,
             ),
-            TextButton(
+            Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(DateFormat.yMMMEd().format(_date)),
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Choose Date',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      _showDatePicker();
+                    },
+                  )
+                ],
+              ),
+            ),
+            ElevatedButton(
               child: Text('ADD'),
               onPressed: () {
                 _handleSubmit();

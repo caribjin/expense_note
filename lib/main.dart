@@ -47,43 +47,49 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [];
+  final List<Transaction> _transactions = [];
 
   @override
   void initState() {
     super.initState();
 
-    // for (int i = 0; i < 20; i++) {
-    //   transactions.add(
-    //     Transaction(
-    //       id: 't$i',
-    //       title: 'Title $i',
-    //       amount: 100,
-    //       date: DateTime.now(),
-    //     ),
-    //   );
-    // }
+    for (int i = 0; i < 10; i++) {
+      _transactions.add(
+        Transaction(
+          id: 't$i',
+          title: 'Title $i',
+          amount: 10000.20,
+          date: DateTime.now(),
+        ),
+      );
+    }
   }
 
   List<Transaction> get _recentTransactions {
-    return transactions.where((tx) {
+    return _transactions.where((tx) {
       return tx.date.add(Duration(days: 7)).isAfter(DateTime.now());
     }).toList();
   }
 
-  void _addTransaction(String title, double amount) {
+  void _addTransaction(String title, double amount, DateTime date) {
     final newTransaction = Transaction(
-      id: 't${transactions.length + 1}',
+      id: 't${_transactions.length + 1}',
       title: title,
       amount: amount,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
-      transactions.add(newTransaction);
+      _transactions.add(newTransaction);
     });
 
     Navigator.of(context).pop();
+  }
+
+  void _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tx) => tx.id == id);
+    });
   }
 
   void _showNewTransaction(BuildContext context) {
@@ -116,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(transactions),
+            TransactionList(_transactions, _removeTransaction),
           ],
         ),
       ),
