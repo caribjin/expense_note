@@ -53,58 +53,66 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.green,
-      padding: EdgeInsets.symmetric(
-        horizontal: 20,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLines: 1,
-            decoration: InputDecoration(
-              labelText: 'Title',
-            ),
-            keyboardType: TextInputType.text,
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            // bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+            bottom: 10,
           ),
-          TextField(
-            controller: _amountController,
-            maxLines: 1,
-            decoration: InputDecoration(
-              labelText: 'Amount',
-            ),
-            keyboardType: TextInputType.number,
-          ),
-          Container(
-            height: 70,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(DateFormat.yMMMEd().format(_date)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                controller: _titleController,
+                maxLines: 1,
+                decoration: InputDecoration(
+                  labelText: 'Title',
                 ),
-                TextButton(
-                  child: Text(
-                    'Choose Date',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                keyboardType: TextInputType.text,
+              ),
+              TextField(
+                controller: _amountController,
+                maxLines: 1,
+                decoration: InputDecoration(
+                  labelText: 'Amount',
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              Container(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(DateFormat.yMMMEd().format(_date)),
                     ),
-                  ),
-                  onPressed: () {
-                    _showDatePicker();
-                  },
-                )
-              ],
-            ),
+                    TextButton(
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () {
+                        _showDatePicker();
+                      },
+                    )
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                child: Text('ADD'),
+                onPressed: () {
+                  _handleSubmit();
+                },
+              ),
+            ],
           ),
-          ElevatedButton(
-            child: Text('ADD'),
-            onPressed: () {
-              _handleSubmit();
-            },
-          ),
-        ],
+        ),
       ),
     );
   }

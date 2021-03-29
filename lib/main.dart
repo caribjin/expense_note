@@ -5,8 +5,16 @@ import 'package:expense_note/widgets/chart.dart';
 import 'package:expense_note/widgets/new_transaction.dart';
 import 'package:expense_note/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
+
   runApp(MyApp());
 }
 
@@ -95,17 +103,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void _showNewTransaction(BuildContext context) {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (_) {
-          return GestureDetector(
-            child: NewTransaction(_addTransaction),
-            onTap: () {},
-            behavior: HitTestBehavior.opaque,
-          );
+          return NewTransaction(_addTransaction);
         });
   }
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     final appBar = AppBar(
       title: Text('Personal Expenses'),
       actions: [
@@ -124,11 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
+              height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.3,
               child: Chart(_recentTransactions),
             ),
             Container(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+              height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
               child: TransactionList(_transactions, _removeTransaction),
             ),
           ],
