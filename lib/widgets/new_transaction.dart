@@ -53,60 +53,58 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        // color: Colors.green,
-        padding: EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              controller: _titleController,
-              maxLines: 1,
-              decoration: InputDecoration(
-                labelText: 'Title',
-              ),
-              keyboardType: TextInputType.text,
+    return Container(
+      // color: Colors.green,
+      padding: EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          TextField(
+            controller: _titleController,
+            maxLines: 1,
+            decoration: InputDecoration(
+              labelText: 'Title',
             ),
-            TextField(
-              controller: _amountController,
-              maxLines: 1,
-              decoration: InputDecoration(
-                labelText: 'Amount',
-              ),
-              keyboardType: TextInputType.number,
+            keyboardType: TextInputType.text,
+          ),
+          TextField(
+            controller: _amountController,
+            maxLines: 1,
+            decoration: InputDecoration(
+              labelText: 'Amount',
             ),
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(DateFormat.yMMMEd().format(_date)),
-                  ),
-                  TextButton(
-                    child: Text(
-                      'Choose Date',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+            keyboardType: TextInputType.number,
+          ),
+          Container(
+            height: 70,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(DateFormat.yMMMEd().format(_date)),
+                ),
+                TextButton(
+                  child: Text(
+                    'Choose Date',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                    onPressed: () {
-                      _showDatePicker();
-                    },
-                  )
-                ],
-              ),
+                  ),
+                  onPressed: () {
+                    _showDatePicker();
+                  },
+                )
+              ],
             ),
-            ElevatedButton(
-              child: Text('ADD'),
-              onPressed: () {
-                _handleSubmit();
-              },
-            ),
-          ],
-        ),
+          ),
+          ElevatedButton(
+            child: Text('ADD'),
+            onPressed: () {
+              _handleSubmit();
+            },
+          ),
+        ],
       ),
     );
   }
