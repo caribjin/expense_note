@@ -7,10 +7,10 @@ class Transaction {
 	final DateTime date;
 
 	const Transaction({
-		@required this.id,
-		@required this.title,
-		@required this.amount, 
-		@required this.date
+		required this.id,
+		required this.title,
+		required this.amount,
+		required this.date
 	});
 
 	@override
@@ -37,10 +37,10 @@ class Transaction {
 	}	
 
 Transaction copyWith({
-		String id,
-		String title,
-		double amount,
-		DateTime date,
+		String? id,
+		String? title,
+		double? amount,
+		DateTime? date,
 	}) {
 		return Transaction(
 			id: id ?? this.id,

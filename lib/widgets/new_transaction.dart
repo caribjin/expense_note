@@ -13,14 +13,7 @@ class NewTransaction extends StatefulWidget {
 class _NewTransactionState extends State<NewTransaction> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  DateTime _date;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _date = DateTime.now();
-  }
+  DateTime _date = DateTime.now();
 
   void _handleSubmit() {
     String title = _titleController.text;
@@ -37,7 +30,7 @@ class _NewTransactionState extends State<NewTransaction> {
   }
 
   void _showDatePicker() async {
-    DateTime currentDate = await showDatePicker(
+    DateTime? currentDate = await showDatePicker(
       context: context,
       initialDate: _date,
       firstDate: DateTime(2021),
@@ -57,7 +50,7 @@ class _NewTransactionState extends State<NewTransaction> {
       child: Card(
         elevation: 5,
         child: Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 10,
             left: 10,
             right: 10,
@@ -91,12 +84,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       child: Text(DateFormat.yMMMEd().format(_date)),
                     ),
                     TextButton(
-                      child: Text(
-                        'Choose Date',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: Text('Choose Date'),
                       onPressed: () {
                         _showDatePicker();
                       },
@@ -105,7 +93,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 ),
               ),
               ElevatedButton(
-                child: Text('ADD'),
+                child: const Text('ADD'),
                 onPressed: () {
                   _handleSubmit();
                 },

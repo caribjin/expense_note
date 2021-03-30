@@ -5,7 +5,6 @@ import 'package:expense_note/widgets/chart.dart';
 import 'package:expense_note/widgets/new_transaction.dart';
 import 'package:expense_note/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +43,7 @@ class MyApp extends StatelessWidget {
               ),
         ),
       ),
+      darkTheme: ThemeData.dark(),
       home: MyHomePage(),
     );
   }
@@ -113,10 +113,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final appBar = AppBar(
-      title: Text('Personal Expenses'),
+      title: const Text('Personal Expenses'),
       actions: [
         IconButton(
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           tooltip: 'Add Transaction',
           onPressed: () => _showNewTransaction(context),
         ),
@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         tooltip: 'Add Transaction',
         // backgroundColor: Colors.orangeAccent,
         onPressed: () => _showNewTransaction(context),
