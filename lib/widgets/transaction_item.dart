@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:expense_note/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class TransactionItem extends StatelessWidget {
+class TransactionItem extends StatefulWidget {
   const TransactionItem({
     Key? key,
     required Transaction transaction,
@@ -15,10 +17,27 @@ class TransactionItem extends StatelessWidget {
   final Function _handlerRemoveTransaction;
 
   @override
+  _TransactionItemState createState() => _TransactionItemState();
+}
+
+class _TransactionItemState extends State<TransactionItem> {
+  late Color _bgColor;
+
+  @override
+  void initState() {
+    const List<Color> availableColors = [Colors.red, Colors.blue, Colors.green, Colors.amber, Colors.purple];
+
+    _bgColor = availableColors[Random().nextInt(availableColors.length)];
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
 
     return Card(
+      key: widget.key,
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 3,
@@ -27,11 +46,12 @@ class TransactionItem extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
           radius: 30,
+          backgroundColor: _bgColor,
           child: Padding(
             padding: const EdgeInsets.all(6.0),
             child: FittedBox(
               child: Text(
-                '\$ ${_transaction.amount.toStringAsFixed(2)}',
+                '\$ ${widget._transaction.amount.toStringAsFixed(2)}',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -40,11 +60,11 @@ class TransactionItem extends StatelessWidget {
           ),
         ),
         title: Text(
-          _transaction.title,
+          widget._transaction.title,
           style: Theme.of(context).textTheme.headline6,
         ),
         subtitle: Text(
-          DateFormat('yyyy-MM-dd hh:mm:dd').format(_transaction.date),
+          DateFormat('yyyy-MM-dd hh:mm:dd').format(widget._transaction.date),
           style: Theme.of(context).textTheme.caption,
         ),
         trailing: mediaQuery.size.width > 400
@@ -55,7 +75,7 @@ class TransactionItem extends StatelessWidget {
                   primary: Theme.of(context).errorColor,
                 ),
                 onPressed: () {
-                  _handlerRemoveTransaction(_transaction.id);
+                  widget._handlerRemoveTransaction(widget._transaction.id);
                 },
               )
             : IconButton(
@@ -64,7 +84,7 @@ class TransactionItem extends StatelessWidget {
                   color: Theme.of(context).errorColor,
                 ),
                 onPressed: () {
-                  _handlerRemoveTransaction(_transaction.id);
+                  widget._handlerRemoveTransaction(widget._transaction.id);
                 },
               ),
       ),
