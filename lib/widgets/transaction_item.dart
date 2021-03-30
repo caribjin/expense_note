@@ -7,7 +7,9 @@ class TransactionItem extends StatelessWidget {
     Key? key,
     required Transaction transaction,
     required Function handlerRemoveTransaction,
-  }) : _transaction = transaction, _handlerRemoveTransaction = handlerRemoveTransaction, super(key: key);
+  })   : _transaction = transaction,
+        _handlerRemoveTransaction = handlerRemoveTransaction,
+        super(key: key);
 
   final Transaction _transaction;
   final Function _handlerRemoveTransaction;
@@ -47,24 +49,24 @@ class TransactionItem extends StatelessWidget {
         ),
         trailing: mediaQuery.size.width > 400
             ? TextButton.icon(
-          icon: const Icon(Icons.delete),
-          label: const Text('Delete'),
-          style: TextButton.styleFrom(
-            primary: Theme.of(context).errorColor,
-          ),
-          onPressed: () {
-            _handlerRemoveTransaction(_transaction.id);
-          },
-        )
+                icon: const Icon(Icons.delete),
+                label: const Text('Delete'),
+                style: TextButton.styleFrom(
+                  primary: Theme.of(context).errorColor,
+                ),
+                onPressed: () {
+                  _handlerRemoveTransaction(_transaction.id);
+                },
+              )
             : IconButton(
-          icon: Icon(
-            Icons.delete,
-            color: Theme.of(context).errorColor,
-          ),
-          onPressed: () {
-            _handlerRemoveTransaction(_transaction.id);
-          },
-        ),
+                icon: Icon(
+                  Icons.delete,
+                  color: Theme.of(context).errorColor,
+                ),
+                onPressed: () {
+                  _handlerRemoveTransaction(_transaction.id);
+                },
+              ),
       ),
     );
   }

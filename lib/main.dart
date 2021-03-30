@@ -7,7 +7,7 @@ import 'package:expense_note/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
@@ -29,8 +29,6 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
                 fontFamily: 'OpenSans',
-                // fontWeight: FontWeight.bold,
-                // fontSize: 18,
               ),
             ),
         appBarTheme: AppBarTheme(
@@ -130,11 +128,17 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.3,
+              height: (mediaQuery.size.height -
+                      appBar.preferredSize.height -
+                      mediaQuery.padding.top) *
+                  0.3,
               child: Chart(_recentTransactions),
             ),
             Container(
-              height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
+              height: (mediaQuery.size.height -
+                      appBar.preferredSize.height -
+                      mediaQuery.padding.top) *
+                  0.7,
               child: TransactionList(_transactions, _removeTransaction),
             ),
           ],
@@ -144,7 +148,6 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         tooltip: 'Add Transaction',
-        // backgroundColor: Colors.orangeAccent,
         onPressed: () => _showNewTransaction(context),
       ),
     );
